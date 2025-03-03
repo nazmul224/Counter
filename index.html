@@ -38,7 +38,7 @@
 
         .counter-button {
             padding: 10px 20px;
-            font-size: 25px;
+            font-size: 45px;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -101,12 +101,7 @@
 </head>
 <body>
 
-    <div class="counter-container">
-        <div class="counter-display" id="counterDisplay">0</div>
-        <button class="counter-button" id="addButton">ADD</button> <br>
-        <button class="reset-button" id="resetButton">RESET</button>
-        <button class="submit-button" id="submitButton">SUBMIT</button>
-    </div>
+    
 
     <table id="dataTable">
         <thead>
@@ -119,6 +114,16 @@
             <!-- Data will be displayed here -->
         </tbody>
     </table>
+    <br><br><br><br>
+
+    <div class="counter-container">
+        
+       
+        <button class="reset-button" id="resetButton">RESET</button>
+        <button class="submit-button" id="submitButton">SUBMIT</button><br> <br>
+        <div class="counter-display" id="counterDisplay">0</div>
+        <button class="counter-button" id="addButton">ADD</button> 
+    </div>
 
     <script>
         let count = 0;
