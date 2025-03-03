@@ -101,8 +101,6 @@
 </head>
 <body>
 
-    
-
     <table id="dataTable">
         <thead>
             <tr>
@@ -114,24 +112,34 @@
             <!-- Data will be displayed here -->
         </tbody>
     </table>
-    <br><br><br><br><br><br><br><br>
-    <br><br><br><br><br>
-   
-    
 
+    <br><br><br><br><br><br><br><br>
+    <br><br><br>
 
     <div class="counter-container">
-        
-       
         <button class="reset-button" id="resetButton">RESET</button>
-        <button class="submit-button" id="submitButton">SUBMIT</button><br> <br>
+        <button class="submit-button" id="submitButton">SUBMIT</button><br><br>
         <div class="counter-display" id="counterDisplay">0</div>
         <button class="counter-button" id="addButton">ADD</button> 
     </div>
 
     <script>
         let count = 0;
-        const data = [];
+        let data = [];
+
+        // Load data from localStorage
+        window.onload = () => {
+            const savedData = localStorage.getItem('counterData');
+            if (savedData) {
+                data = JSON.parse(savedData);
+                updateDataTable();
+            }
+            const savedCount = localStorage.getItem('counterValue');
+            if (savedCount) {
+                count = parseInt(savedCount);
+                updateCounterDisplay();
+            }
+        };
 
         // DOM elements
         const counterDisplay = document.getElementById('counterDisplay');
@@ -143,6 +151,7 @@
         // Update the counter display
         function updateCounterDisplay() {
             counterDisplay.textContent = count;
+            localStorage.setItem('counterValue', count);  // Save the current counter value
         }
 
         // Add button click event
@@ -162,6 +171,7 @@
             const today = new Date().toLocaleDateString();
             data.push({ date: today, value: count });
             updateDataTable();
+            localStorage.setItem('counterData', JSON.stringify(data));  // Save the data to localStorage
         });
 
         // Update the data table
