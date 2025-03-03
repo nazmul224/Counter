@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter with Submit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            flex-direction: column;
+        }
+
+        .counter-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .counter-display {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .counter-button {
+            padding: 10px 20px;
+            font-size: 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .counter-button:hover {
+            background-color: #45a049;
+        }
+
+        .reset-button {
+            padding: 10px 20px;
+            font-size: 10px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reset-button:hover {
+            background-color: #cc0000;
+        }
+
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 80%;
+            margin-top: 30px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="counter-container">
+        <div class="counter-display" id="counterDisplay">0</div>
+        <button class="counter-button" id="addButton">ADD</button> <br>
+        <button class="reset-button" id="resetButton">RESET</button>
+        <button class="submit-button" id="submitButton">SUBMIT</button>
+    </div>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Counter Value</th>
+            </tr>
+        </thead>
+        <tbody id="dataBody">
+            <!-- Data will be displayed here -->
+        </tbody>
+    </table>
+
+    <script>
+        let count = 0;
+        const data = [];
+
+        // DOM elements
+        const counterDisplay = document.getElementById('counterDisplay');
+        const addButton = document.getElementById('addButton');
+        const resetButton = document.getElementById('resetButton');
+        const submitButton = document.getElementById('submitButton');
+        const dataBody = document.getElementById('dataBody');
+
+        // Update the counter display
+        function updateCounterDisplay() {
+            counterDisplay.textContent = count;
+        }
+
+        // Add button click event
+        addButton.addEventListener('click', () => {
+            count += 1;
+            updateCounterDisplay();
+        });
+
+        // Reset button click event
+        resetButton.addEventListener('click', () => {
+            count = 0;
+            updateCounterDisplay();
+        });
+
+        // Submit button click event
+        submitButton.addEventListener('click', () => {
+            const today = new Date().toLocaleDateString();
+            data.push({ date: today, value: count });
+            updateDataTable();
+        });
+
+        // Update the data table
+        function updateDataTable() {
+            dataBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.date}</td>
+                    <td>${item.value}</td>
+                `;
+                dataBody.appendChild(row);
+            });
+        }
+    </script>
+
+</body>
+</html>
